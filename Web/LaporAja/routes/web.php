@@ -32,11 +32,11 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/logout', [ProfileController::class, 'logout'])->name('logout');
     
-    Route::get('/profile',[ProfileController::class, 'create'])->name('profile');
-    Route::get('/profile/laporan-selesai',[ProfileController::class, 'create_selesai']);
-    Route::get('/profile/laporan-diproses',[ProfileController::class, 'create_progres']);
-    Route::get('/profile/laporan-ditolak',[ProfileController::class, 'create_ditolak']);
-    Route::delete('/profile/delete/{id}',[ProfileController::class, 'destroy'])->name('laporan.delete');
+    Route::get('/profilelaporan',[ProfileController::class, 'create'])->name('profile');
+    Route::get('/profilelaporan/laporan-selesai',[ProfileController::class, 'create_selesai']);
+    Route::get('/profilelaporan/laporan-diproses',[ProfileController::class, 'create_progres']);
+    Route::get('/profilelaporan/laporan-ditolak',[ProfileController::class, 'create_ditolak']);
+    Route::delete('/profilelaporan/delete/{id}',[ProfileController::class, 'destroy'])->name('laporan.delete');
 });
 
 Route::group(['middleware' => ['admin']], function() {
@@ -54,5 +54,14 @@ Route::get('/kontakdarurat', [KontakController::class, 'create'])->name('kontak'
 Route::get('/dashboard', function() {
     return view('landingpage');
 })->name('dashboard');
+
+// Baru
+Route::get('/akun', function() {
+    return view('akun');
+})->name('akun');
+
+Route::get('/akun/ubahemail', function() {
+    return view('ubahemail');
+})->name('ubahemail');
 
 Route::redirect('/', '/dashboard');
