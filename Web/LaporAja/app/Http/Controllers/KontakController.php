@@ -111,11 +111,12 @@ class KontakController extends Controller
     {
         $kontak = KontakPenting::find($id);
         $kontak->admin_id = auth()->id();
-        $kontak->namainstansi = $request->namainstansi;
+        $kontak->namainstansi = ucwords(strtolower($request->namainstansi));
         $kontak->nomortelepon = $request->nomortelepon;
-        $kontak->alamat = $request->alamat;
+        $kontak->alamat = ucwords(strtolower($request->alamat));
+        $kontak->jenisinstansi = ucwords(strtolower($request->jenisinstansi));
         $kontak->save();
-
+        
         session()->flash('success', 'Kontak berhasil diubah!');
         return redirect()->route('kontak');
     }

@@ -96,6 +96,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                    @include('partial.alert')
                                                     <form id="delete-form-{{$data->id}}" action="{{route('kontak.delete', $data->id)}}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -137,6 +138,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                    @include('partial.alert')
                                                     <form id="delete-form-{{$data->id}}" action="{{route('kontak.delete', $data->id)}}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -178,6 +180,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                    @include('partial.alert')
                                                     <form id="delete-form-{{$data->id}}" action="{{route('kontak.delete', $data->id)}}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
