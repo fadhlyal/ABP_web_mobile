@@ -94,7 +94,10 @@ class KontakController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kontak = KontakPenting::find($id);
+        return view('gantikontak', [
+            'kontak' => $kontak
+        ]);
     }
 
     /**
@@ -106,7 +109,15 @@ class KontakController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kontak = KontakPenting::find($id);
+        $kontak->admin_id = auth()->id();
+        $kontak->namainstansi = $request->namainstansi;
+        $kontak->nomortelepon = $request->nomortelepon;
+        $kontak->alamat = $request->alamat;
+        $kontak->save();
+
+        session()->flash('success', 'Kontak berhasil diubah!');
+        return redirect()->route('kontak');
     }
 
     /**
@@ -117,6 +128,11 @@ class KontakController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (auth()->getUser()->isAdmin()) {
+            $kontak = KontakPenting::where('id', $id)
+                    ->delete();
+        }
+        session()->flash('success', 'Kontak berhasil dihapus!');
+        return redirect()->route('kontak');
     }
 }

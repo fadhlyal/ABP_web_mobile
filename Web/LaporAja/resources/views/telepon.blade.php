@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
     <script src="https://kit.fontawesome.com/1b514b8e9a.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
@@ -76,6 +77,37 @@
                         <!-- <h4>{{$data->namainstansi}}<i class="fa-solid fa-play"></i></h4> -->
                         <h7>{{$data->alamat}}</h7>
                         <h7>{{$data->nomortelepon}}</h7>
+                        @if (auth()->check())
+                            @if (Auth::user()->isAdmin())
+                                <br>
+                                <div>
+                                    <a href="/kontakdarurat/edit/{{$data->id}}"><button type="button" class="btn btn-outline-secondary">Ganti Data</button></a>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#RS-{{$data->id}}">Hapus Data</button>
+                                    <p></p>
+                                    <div class="modal fade" id="RS-{{$data->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Data</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Apakah anda yakin akan menghapus Rumah Sakit ini??
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                    <form id="delete-form-{{$data->id}}" action="{{route('kontak.delete', $data->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
                         <!-- <h4><strong>{{$data->namainstansi}}</strong></h4>
                         <h6>{{$data->alamat}}</h6>
                         <h6>{{$data->nomortelepon}}</h6> -->
@@ -86,6 +118,37 @@
                         <h4>{{$data->namainstansi}}</h4>
                         <h7>{{$data->alamat}}</h7>
                         <h7>{{$data->nomortelepon}}</h7>
+                        @if (auth()->check())
+                            @if (Auth::user()->isAdmin())
+                                <br>
+                                <div>
+                                    <a href="/kontakdarurat/edit/{{$data->id}}"><button type="button" class="btn btn-outline-secondary">Ganti Data</button></a>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Polsek-{{$data->id}}">Hapus Data</button>
+                                    <p></p>
+                                    <div class="modal fade" id="Polsek-{{$data->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Data</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Apakah anda yakin akan menghapus Kantor Polisi ini??
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                    <form id="delete-form-{{$data->id}}" action="{{route('kontak.delete', $data->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
                         <!-- <h4><strong>{{$data->namainstansi}}</strong></h4>
                         <h6>{{$data->alamat}}</h6>
                         <h6>{{$data->nomortelepon}}</h6> -->
@@ -96,6 +159,37 @@
                         <h4>{{$data->namainstansi}}</h4>
                         <h7>{{$data->alamat}}</h7>
                         <h7>{{$data->nomortelepon}}</h7>
+                        @if (auth()->check())
+                            @if (Auth::user()->isAdmin())
+                                <br>
+                                <div>
+                                    <a href="/kontakdarurat/edit/{{$data->id}}"><button type="button" class="btn btn-outline-secondary">Ganti Data</button></a>
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Pemadam-{{$data->id}}">Hapus Data</button>
+                                    <p></p>
+                                    <div class="modal fade" id="Pemadam-{{$data->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Data</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Apakah anda yakin akan menghapus Kantor Pemadam ini??
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                    <form id="delete-form-{{$data->id}}" action="{{route('kontak.delete', $data->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
                         <!-- <h4><strong>{{$data->namainstansi}}</strong></h4>
                         <h6>{{$data->alamat}}</h6>
                         <h6>{{$data->nomortelepon}}</h6> -->

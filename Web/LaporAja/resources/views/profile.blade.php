@@ -123,7 +123,7 @@
                             <td class="active"><p class="prog">Progres</p></td>
                         @endif
                         @if (Auth::user()->isAdmin())
-                            <td class="edit"><a href="/dashboard/edit/{{$data->id}}">Edit</a></td>
+                            <td class="edit"><a href="/profilelaporan/edit/{{$data->id}}">Edit</a></td>
                         @endif
                         <td class="delete"><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$data->id}}">Delete</a></td>
                         <div class="modal fade" id="exampleModal-{{$data->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

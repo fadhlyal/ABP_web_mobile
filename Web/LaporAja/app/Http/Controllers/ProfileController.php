@@ -149,7 +149,7 @@ class ProfileController extends Controller
         session()->flash('success', 'Laporan berhasil ditanggapi!');
         return redirect()->route('profile');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *

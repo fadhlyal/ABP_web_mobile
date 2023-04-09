@@ -103,8 +103,6 @@
                   </label>
                 </div>
           </div>
-        
-
           <!-- <div class="text">
                   <input type="text" class="form-control" id="inputAddress" placeholder="Jenis Instansi">
           </div> -->

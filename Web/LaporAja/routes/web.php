@@ -42,9 +42,12 @@ Route::group(['middleware' => ['auth']], function() {
 Route::group(['middleware' => ['admin']], function() {
     Route::get('/kontakdarurat/tambah',[KontakController::class, 'add'])->name('tambahkontak');
     Route::post('/kontakdarurat/tambah',[KontakController::class, 'store']);
+    Route::get('/kontakdarurat/edit/{id}', [KontakController::class, 'edit'])->name('edit');
+    Route::post('/kontakdarurat/edit/update/{id}', [KontakController::class, 'update'])->name('kontak.update');
+    Route::delete('/kontakdarurat/delete/{id}',[KontakController::class, 'destroy'])->name('kontak.delete');
 
-    Route::get('/dashboard/edit/{id}', [ProfileController::class, 'edit'])->name('edit');
-    Route::post('/dashboard/edit/update/{id}', [ProfileController::class, 'update'])->name('laporan.update');;
+    Route::get('/profilelaporan/edit/{id}', [ProfileController::class, 'edit'])->name('edit');
+    Route::post('/profilelaporan/edit/update/{id}', [ProfileController::class, 'update'])->name('laporan.update');;
 });
 
 Route::get('/forum', [ForumController::class, 'create'])->name('forum');
