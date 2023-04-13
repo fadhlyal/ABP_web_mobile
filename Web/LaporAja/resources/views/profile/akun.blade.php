@@ -40,6 +40,7 @@
         <h3 class="i-name">
             Profile
         </h3>
+        @include('partial.alert')
 
         <div class="info">
             <div class="mb-3 row">
@@ -99,7 +100,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    @include('partial.alert')
+                    
                     <form id="delete-form-{{$user->id}}" action="{{route('akun.delete', $user->id)}}" method="POST">
                         @csrf
                         @method('DELETE')

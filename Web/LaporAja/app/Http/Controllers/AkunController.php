@@ -84,7 +84,7 @@ class AkunController extends Controller
             $user->save();
             session()->flash('success', 'Email berhasil diubah!');
         } else {
-            session()->flash('message', 'Email gagal diubah!');
+            session()->flash('error', 'Email gagal diubah!');
         }
         return redirect()->route('akun');
     }

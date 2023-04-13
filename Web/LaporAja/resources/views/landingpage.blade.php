@@ -21,7 +21,6 @@
 <body>
     <section id="header">
         <a href="/dashboard"><img src="images\logo header.png" class="logo" alt=""></a>
-
         <div>
             <ul id="navbar">
                 <li><a class="active" href="/dashboard">Beranda</a></li>

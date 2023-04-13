@@ -50,5 +50,17 @@ class UserSeeder extends Seeder
             'password' => "akumuhnuh",
             'role' => 'user'
         ]);
+
+        User::create([
+            'firstname' => "Muhammad",
+            'lastname' => "Nuh",
+            'phonenumber' => "08972449234",
+            'provinsi' => "Dadadaws",
+            'kabkota' => "Bandung",
+            'kecamatan' => "Arcamanik",
+            'email' => "rheyfan@gmail.com",
+            'password' => "12345678",
+            'role' => 'admin'
+        ]);
     }
 }
