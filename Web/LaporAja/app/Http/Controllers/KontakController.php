@@ -15,7 +15,14 @@ class KontakController extends Controller
      */
     public function index()
     {
-        //
+        $rumahsakit = KontakPenting::where('jenisinstansi','=', 'Rumah Sakit')->get();
+        $polisi = KontakPenting::where('jenisinstansi','=', 'Kantor Polisi')->get();
+        $pemadam = KontakPenting::where('jenisinstansi','=', 'Kantor Pemadam')->get();
+        return view('kontak.telepon', [
+            'rumahsakit' => $rumahsakit,
+            'polisi' => $polisi,
+            'pemadam' => $pemadam
+        ]);
     }
 
     /**
@@ -25,21 +32,9 @@ class KontakController extends Controller
      */
     public function create()
     {
-        $rumahsakit =  KontakPenting::where('jenisinstansi','=', 'Rumah Sakit')->get();
-        $polisi = KontakPenting::where('jenisinstansi','=', 'Kantor Polisi')->get();
-        $pemadam = KontakPenting::where('jenisinstansi','=', 'Kantor Pemadam')->get();
-        return view('telepon', [
-            'rumahsakit' => $rumahsakit,
-            'polisi' => $polisi,
-            'pemadam' => $pemadam
-        ]);
+        return view('kontak.tambahkontak');
     }
-
-    public function add()
-    {
-        return view('tambahkontak');
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -95,7 +90,7 @@ class KontakController extends Controller
     public function edit($id)
     {
         $kontak = KontakPenting::find($id);
-        return view('gantikontak', [
+        return view('kontak.gantikontak', [
             'kontak' => $kontak
         ]);
     }

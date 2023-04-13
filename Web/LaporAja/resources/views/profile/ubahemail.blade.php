@@ -38,38 +38,28 @@
         <h3 class="i-name">
             Ubah Data
         </h3>
-
-        <div class="change">
-          <div class="mb-3 row">
-            <label for="email" class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-5">
-              <input type="email" class="form-control" id="email" value="kadalkadal@gmail.com">
-            </div>    
-          </div>
-          <div class="mb-3 row">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Konfirmasi Password</label>
+        @include('partial.alert')
+        <form method="POST" action="{{route('akun.update', $user->id)}}">
+          @csrf
+          <div class="change">
+            <div class="mb-3 row">
+              <label for="email" class="col-sm-2 col-form-label">Email</label>
               <div class="col-sm-5">
-                <input type="password" class="form-control" id="inputPassword">
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>    
+            </div>
+            <div class="mb-3 row">
+              <label for="inputPassword" class="col-sm-2 col-form-label">Konfirmasi Password</label>
+              <div class="col-sm-5">
+                <input type="password" class="form-control" id="password" name="password" required>
               </div>
+            </div>
+
           </div>
-
-        </div>
-
-        <button type="button" class="btn btn-danger">Simpan</button>
-
-
-        
-
-
-        
-
-          
-                   
+          <a href="/akun"><button type="button" class="btn btn-outline-secondary">Batal</button></a>
+          <button type="submit" class="btn btn-danger">Simpan</button>
+        </form>       
     </section>
-    
-    
-
-    
 </body>
 
     

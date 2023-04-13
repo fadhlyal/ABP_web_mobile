@@ -8,6 +8,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AkunController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,39 +33,35 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/logout', [ProfileController::class, 'logout'])->name('logout');
     
-    Route::get('/profilelaporan',[ProfileController::class, 'create'])->name('profile');
-    Route::get('/profilelaporan/laporan-selesai',[ProfileController::class, 'create_selesai']);
-    Route::get('/profilelaporan/laporan-diproses',[ProfileController::class, 'create_progres']);
-    Route::get('/profilelaporan/laporan-ditolak',[ProfileController::class, 'create_ditolak']);
+    Route::get('/profilelaporan',[ProfileController::class, 'index'])->name('profile');
+    Route::get('/profilelaporan/laporan-selesai',[ProfileController::class, 'index_selesai']);
+    Route::get('/profilelaporan/laporan-diproses',[ProfileController::class, 'index_progres']);
+    Route::get('/profilelaporan/laporan-ditolak',[ProfileController::class, 'index_ditolak']);
     Route::delete('/profilelaporan/delete/{id}',[ProfileController::class, 'destroy'])->name('laporan.delete');
+
+    Route::get('/akun', [AkunController::class, 'index'])->name('akun');
+    Route::get('/akun/ubahemail/{id}', [AkunController::class, 'edit'])->name('akun.edit');
+    Route::post('/akun/ubahemail/update/{id}', [AkunController::class, 'update'])->name('akun.update');
+    Route::delete('/akun/delete/{id}',[AkunController::class, 'destroy'])->name('akun.delete');
 });
 
 Route::group(['middleware' => ['admin']], function() {
-    Route::get('/kontakdarurat/tambah',[KontakController::class, 'add'])->name('tambahkontak');
+    Route::get('/kontakdarurat/tambah',[KontakController::class, 'create'])->name('tambahkontak');
     Route::post('/kontakdarurat/tambah',[KontakController::class, 'store']);
-    Route::get('/kontakdarurat/edit/{id}', [KontakController::class, 'edit'])->name('edit');
+    Route::get('/kontakdarurat/edit/{id}', [KontakController::class, 'edit'])->name('kontak.edit');
     Route::post('/kontakdarurat/edit/update/{id}', [KontakController::class, 'update'])->name('kontak.update');
     Route::delete('/kontakdarurat/delete/{id}',[KontakController::class, 'destroy'])->name('kontak.delete');
 
-    Route::get('/profilelaporan/edit/{id}', [ProfileController::class, 'edit'])->name('edit');
+    Route::get('/profilelaporan/edit/{id}', [ProfileController::class, 'edit'])->name('laporan.edit');
     Route::post('/profilelaporan/edit/update/{id}', [ProfileController::class, 'update'])->name('laporan.update');;
 });
 
-Route::get('/forum', [ForumController::class, 'create'])->name('forum');
+Route::get('/forum', [LaporanController::class, 'index'])->name('forum');
 
-Route::get('/kontakdarurat', [KontakController::class, 'create'])->name('kontak');
+Route::get('/kontakdarurat', [KontakController::class, 'index'])->name('kontak');
 
 Route::get('/dashboard', function() {
     return view('landingpage');
 })->name('dashboard');
-
-// Baru
-Route::get('/akun', function() {
-    return view('akun');
-})->name('akun');
-
-Route::get('/akun/ubahemail', function() {
-    return view('ubahemail');
-})->name('ubahemail');
 
 Route::redirect('/', '/dashboard');

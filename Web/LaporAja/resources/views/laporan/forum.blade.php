@@ -32,7 +32,7 @@
                         <li><a href="/profilelaporan">Tanggapi</a></li>
                     @endif
                     <li>|</li>
-                    <li><a href="/profilelaporan"><i class="fa-solid fa-user"></i></a></li>
+                    <li><a href="/akun"><i class="fa-solid fa-user"></i></a></li>
                 @else
                     <li>|</li>
                     <li><a href="/login">Masuk</a></li>

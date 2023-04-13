@@ -45,61 +45,66 @@
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Nama</label>
                 <div class="col-sm-10">
-                <input type="text" readonly class="form-control-plaintext" value="Kian Nailaizza">
+                    <input type="text" readonly class="form-control-plaintext" value="{{$user->firstname}} {{$user->lastname}}">
                 </div>
             </div>
             
             <div class="mb-3 row">
-                <label class="col-sm-2 col-form-label">Alamat</label>
+                <label class="col-sm-2 col-form-label">Telepon</label>
                 <div class="col-sm-10">
-                <input type="text" readonly class="form-control-plaintext" value="Jl. Telkomunikasi nomer 2">
+                <input type="text" readonly class="form-control-plaintext" value="{{$user->phonenumber}}">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Provinsi</label>
                 <div class="col-sm-10">
-                <input type="text" readonly class="form-control-plaintext" value="Jawa Barat">
+                <input type="text" readonly class="form-control-plaintext" value="{{$user->provinsi}}">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Kota</label>
                 <div class="col-sm-10">
-                <input type="text" readonly class="form-control-plaintext" value="Bandung">
+                <input type="text" readonly class="form-control-plaintext" value="{{$user->kabkota}}">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label class="col-sm-2 col-form-label">Kecamatan</label>
                 <div class="col-sm-10">
-                <input type="text" readonly class="form-control-plaintext" value="Lengkong">
+                <input type="text" readonly class="form-control-plaintext" value="{{$user->kecamatan}}">
                 </div>
             </div>
             <div class="row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                  <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                  <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="{{$user->email}}">
                 </div>
             </div>
             
         </div>
         
         <div>
-            <a href="/akun/ubahemail"><button type="button" class="btn btn-outline-secondary">Ganti Email</button></a>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Hapus Akun</button>
+            <a href="/akun/ubahemail/{{$user->id}}"><button type="button" class="btn btn-outline-secondary">Ganti Email</button></a>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#hapus-{{$user->id}}">Hapus Akun</button>
         </div>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="hapus-{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Akun</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Akun</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   Apakah anda yakin akan menghapus akun anda ini??
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                  <button type="button" class="btn btn-danger">Hapus</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    @include('partial.alert')
+                    <form id="delete-form-{{$user->id}}" action="{{route('akun.delete', $user->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </form>
                 </div>
               </div>
             </div>
