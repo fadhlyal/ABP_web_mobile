@@ -97,11 +97,18 @@ class AkunController extends Controller
      */
     public function destroy($id)
     {
-        $user = Auth::user();
-        Auth::logout();
-        $laporan = Laporan::where('user_id', $user->id)->delete();
-        $user->forceDelete();
-        session()->flash('success', 'Akun berhasil dihapus!');
-        return redirect()->to('/');
+        if (auth()->getUser()->isAdmin()) {
+            
+            session()->flash('error', 'Admin tidak bisa hapus akun!');
+            return redirect()->route('akun');
+            
+        }else{
+            $user = Auth::user();
+            Auth::logout();
+            $laporan = Laporan::where('user_id', $user->id)->delete();
+            $user->forceDelete();
+            session()->flash('success', 'Akun berhasil dihapus!');
+            return redirect()->to('/');
+        }
     }
 }
