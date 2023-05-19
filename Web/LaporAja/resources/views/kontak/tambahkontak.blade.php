@@ -21,8 +21,8 @@
 
 
     <body>
-      <section id="header">
-        <a href="#"><img src="\images\logo header.png" class="logo" alt=""></a>
+    <section id="header">
+        <a href="/dashboard"><img src="images\logo header.png" class="logo" alt=""></a>
 
         <div>
             <ul id="navbar">
@@ -32,10 +32,10 @@
                 <li><a class="active" href="/kontakdarurat">Kontak</a></li>
                 @if (auth()->check())
                     @if (Auth::user()->isAdmin())
-                        <li><a href="/profile">Tanggapi</a></li>
+                        <li><a href="/profilelaporan">Tanggapi</a></li>
                     @endif
                     <li>|</li>
-                    <li><a href="/profile"><i class="fa-solid fa-user"></i></a></li>
+                    <li><a href="/akun"><i class="fa-solid fa-user"></i></a></li>
                 @else
                     <li>|</li>
                     <li><a href="/login">Masuk</a></li>

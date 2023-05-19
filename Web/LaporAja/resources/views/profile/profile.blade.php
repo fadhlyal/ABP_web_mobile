@@ -30,9 +30,9 @@
         </div>
 
         <div class="items">
-            <!-- <li><i class="fa-solid fa-circle-user"></i><a href="/profile">Profile</a></li> -->
-            <li><i class="fa-solid fa-clipboard-list"></i><a href="/profile">Laporan</a></li>
-            <li><i class="fa-solid fa-right-from-bracket"></i><a href="/logout">Keluar</a></li>
+            <li><a class="fa-solid fa-circle-user"></a><a href="/akun">Profile</a></li>
+            <li class="active"><a class="fa-solid fa-clipboard-list"></a><a href="/profilelaporan">Laporan</a></li>
+            <li><a class="fa-solid fa-right-from-bracket"></a><a href="/logout">Keluar</a></li>
         </div>
     </section>
 
@@ -60,19 +60,19 @@
 
         <div class="uptask">
             <div class="uptaskspace">
-                <h4><a class="active" href="/profile"><small><b>Semua Laporan</b></small></a></h4>
+                <h4><a class="active" href="/profilelaporan"><small><b>Semua Laporan</b></small></a></h4>
             </div>
 
             <div class="uptaskspace">
-                <h4><a href="/profile/laporan-diproses"><small><b>Progres</b></small></a></h4>
+                <h4><a href="/profilelaporan/laporan-diproses"><small><b>Progres</b></small></a></h4>
             </div>
 
             <div class="uptaskspace">
-                <h4><a href="/profile/laporan-ditolak"><small><b>Ditolak</b></small></a></h4>
+                <h4><a href="/profilelaporan/laporan-ditolak"><small><b>Ditolak</b></small></a></h4>
             </div>
 
             <div class="uptaskspace">
-                <h4><a href="/profile/laporan-selesai"><small><b>Selesai</b></small></a></h4>
+                <h4><a href="/profilelaporan/laporan-selesai"><small><b>Selesai</b></small></a></h4>
             </div>
         </div>
 
@@ -123,7 +123,7 @@
                             <td class="active"><p class="prog">Progres</p></td>
                         @endif
                         @if (Auth::user()->isAdmin())
-                            <td class="edit"><a href="/dashboard/edit/{{$data->id}}">Edit</a></td>
+                            <td class="edit"><a href="/profilelaporan/edit/{{$data->id}}">Edit</a></td>
                         @endif
                         <td class="delete"><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$data->id}}">Delete</a></td>
                         <div class="modal fade" id="exampleModal-{{$data->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

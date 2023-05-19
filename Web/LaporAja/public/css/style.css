@@ -174,8 +174,13 @@
 
 #but{
     padding-top: 10px;
-    width: 60px; /* Menetapkan lebar elemen "but" sebesar 50% */
+    width: 25%; /* Menetapkan lebar elemen "but" sebesar 50% */
     margin: auto; /* Menempatkan elemen "but" di tengah */
+    display: flex;
+}
+
+#but button:first-child {
+    margin-right: 10px;
 }
 
 .px-3 .form-select {

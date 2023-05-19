@@ -15,7 +15,11 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        //
+        $laporan = Laporan::all();
+        $bagilaporan = $laporan->chunk(ceil($laporan->count() / 2));
+        return view('laporan.forum', [
+            'laporan' => $bagilaporan
+        ]);
     }
 
     /**
@@ -25,7 +29,7 @@ class LaporanController extends Controller
      */
     public function create()
     {
-        return view('lapor');
+        return view('laporan.lapor');
     }
 
     /**

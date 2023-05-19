@@ -43,39 +43,44 @@ body {
     transition: 0.3s ease;
 }
 
-#menu .items .active {
-    background-color: #572826;
-}
-
 #menu .items li:hover {
     background: #572826;
     cursor: pointer;
 }
 
-#menu .items li a {
+
+
+#menu .items li:nth-child(2){ /*Garis paling kri sidebar*/
+    border-left: 4px solid #ffff;
+}
+
+#menu .items li i {
     color: rgb(134, 141, 151);
+    width: 30px;
+    height: 30px;
     line-height: 30px;
     text-align: center;
     font-size: 14px;
     margin: 0 10px 0 25px;
+}
+
+#menu .items li:hover i,
+#menu .items li:hover a {
+    color: #f3f4f6;
+}
+
+#menu .items li a {
     text-decoration: none;
     color: rgb(203, 209, 218);
     font-weight: 300px;
     transition: 0.3s ease;
 }
 
-#menu .items li:hover a {
-    color: #f3f4f6;
-}
 
 #interface {
     width: calc(100% - 240px);
     margin-left: 245px;
     position: relative;
-}
-
-#interface .col-6 {
-    padding-bottom: 20px;
 }
 
 #interface .navigation {
@@ -142,19 +147,7 @@ body {
     /* margin-top: 70px; */
 }
 
-.info {
-    color: #000000;
-    padding: 30px 30px 0 30px;
-    font-size: 18px;
-    font-weight: 700;
-    /* margin-top: 70px; */
-}
-
-#interface h4 {
-    font-size: 22px;
-}
-
-.uptask h4{
+.uptask li{
     list-style: none;
     padding: 0 20px;
     position: relative;
@@ -171,7 +164,7 @@ body {
 .uptask .uptaskspace{
     margin-top: 30px;
     display: inline-block;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .uptask .uptaskspace a{
@@ -252,14 +245,11 @@ hr{
     color: #787d8d;
 }
 
-.board .tbody,
-.board .edit,
-.board .delete {
+.board .people {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     text-align: start;
-    display: inline-block;
 }
 
 table {
@@ -403,9 +393,9 @@ tbody tr td {
     }
 }
 
-/*fotrm edit*/
+/*form edit*/
 #interface .radio{
-    margin-top: 20px;
+    margin-top: 80px;
     margin-left: 30px;
 }
 
@@ -432,10 +422,13 @@ tbody tr td {
     padding-left: 80px;
 }
 
-/* #interface .info{
+
+
+#interface .info{
     padding-top: 60px;
+
     margin-left: 25px;
-} */
+}
 
 /*Ubah data*/
 .change{

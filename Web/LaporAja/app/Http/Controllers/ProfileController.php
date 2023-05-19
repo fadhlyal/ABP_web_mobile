@@ -14,7 +14,18 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+        if (auth()->getUser()->isAdmin()) {
+            $laporan = Laporan::with('user')->where('provinsi','=',auth()->getUser()->provinsi)
+                ->orWhere('user_id','=',auth()->id())
+                ->get();
+            return view('profile.profile', [
+                'laporan' => $laporan
+            ]);
+        }
+        $laporan = Laporan::with('user')->where('user_id','=',auth()->id())->get();
+        return view('profile.profile', [
+            'laporan' => $laporan
+        ]);
     }
 
     /**
@@ -24,21 +35,10 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        if (auth()->getUser()->isAdmin()) {
-            $laporan = Laporan::with('user')->where('provinsi','=',auth()->getUser()->provinsi)
-                ->orWhere('user_id','=',auth()->id())
-                ->get();
-            return view('profile', [
-                'laporan' => $laporan
-            ]);
-        }
-        $laporan = Laporan::with('user')->where('user_id','=',auth()->id())->get();
-        return view('profile', [
-            'laporan' => $laporan
-        ]);
+        //
     }
 
-    public function create_selesai()
+    public function index_selesai()
     {
         if (auth()->getUser()->isAdmin()) {
             $laporan = Laporan::with('user')->where('provinsi','=',auth()->getUser()->provinsi)
@@ -46,18 +46,18 @@ class ProfileController extends Controller
                 ->orWhere('user_id','=',auth()->id())
                 ->where('status','=','selesai')
                 ->get();
-            return view('dashboard-selesai', [
+            return view('profile.dashboard-selesai', [
                 'laporan' => $laporan
             ]);
         }
         $laporan = Laporan::with('user')->where('user_id','=',auth()->id())
             ->where('status','=','selesai')->get();
-        return view('dashboard-selesai', [
+        return view('profile.dashboard-selesai', [
             'laporan' => $laporan
         ]);
     }
 
-    public function create_ditolak()
+    public function index_ditolak()
     {
         if (auth()->getUser()->isAdmin()) {
             $laporan = Laporan::with('user')->where('provinsi','=',auth()->getUser()->provinsi)
@@ -65,19 +65,19 @@ class ProfileController extends Controller
                 ->orWhere('user_id','=',auth()->id())
                 ->where('status','=','ditolak')
                 ->get();
-            return view('dashboard-ditolak', [
+            return view('profile.dashboard-ditolak', [
                 'laporan' => $laporan
             ]);
         }
         $laporan = Laporan::with('user')->where('user_id','=',auth()->id())
             ->where('status','=','ditolak')
             ->get();
-        return view('dashboard-ditolak', [
+        return view('profile.dashboard-ditolak', [
             'laporan' => $laporan
         ]);
     }
 
-    public function create_progres()
+    public function index_progres()
     {
         if (auth()->getUser()->isAdmin()) {
             $laporan = Laporan::with('user')->where('provinsi','=',auth()->getUser()->provinsi)
@@ -85,13 +85,13 @@ class ProfileController extends Controller
                 ->orWhere('user_id','=',auth()->id())    
                 ->where('status','=','diproses')
                 ->get();
-            return view('dashboard-progres', [
+            return view('profile.dashboard-progres', [
                 'laporan' => $laporan
             ]);
         }
         $laporan = Laporan::with('user')->where('user_id','=',auth()->id())
             ->where('status','=','diproses')->get();
-        return view('dashboard-progres', [
+        return view('profile.dashboard-progres', [
             'laporan' => $laporan
         ]);
     }
@@ -127,7 +127,7 @@ class ProfileController extends Controller
     public function edit($id)
     {
         $laporan = Laporan::find($id);
-        return view('edit', [
+        return view('profile.edit', [
             'laporan' => $laporan
         ]);
     }
@@ -149,7 +149,7 @@ class ProfileController extends Controller
         session()->flash('success', 'Laporan berhasil ditanggapi!');
         return redirect()->route('profile');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *

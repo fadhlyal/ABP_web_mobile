@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
 use App\Models\Laporan;
+use Illuminate\Support\Facades\Hash;
 
-class ForumController extends Controller
+class AkunController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +17,10 @@ class ForumController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        return view('profile.akun', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -25,11 +30,7 @@ class ForumController extends Controller
      */
     public function create()
     {
-        $laporan = Laporan::all();
-        $bagilaporan = $laporan->chunk(ceil($laporan->count() / 2));
-        return view('forum', [
-            'laporan' => $bagilaporan
-        ]);
+        //
     }
 
     /**
@@ -62,7 +63,10 @@ class ForumController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = Auth::user();
+        return view('profile.ubahemail', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -74,7 +78,15 @@ class ForumController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = Auth::user();
+        if (Hash::check($request->password, $user->password)) {
+            $user->email = $request->email;
+            $user->save();
+            session()->flash('success', 'Email berhasil diubah!');
+        } else {
+            session()->flash('error', 'Email gagal diubah!');
+        }
+        return redirect()->route('akun');
     }
 
     /**
@@ -85,6 +97,18 @@ class ForumController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (auth()->getUser()->isAdmin()) {
+            
+            session()->flash('error', 'Admin tidak bisa hapus akun!');
+            return redirect()->route('akun');
+            
+        }else{
+            $user = Auth::user();
+            Auth::logout();
+            $laporan = Laporan::where('user_id', $user->id)->delete();
+            $user->forceDelete();
+            session()->flash('success', 'Akun berhasil dihapus!');
+            return redirect()->to('/login');
+        }
     }
 }

@@ -15,7 +15,14 @@ class KontakController extends Controller
      */
     public function index()
     {
-        //
+        $rumahsakit = KontakPenting::where('jenisinstansi','=', 'Rumah Sakit')->get();
+        $polisi = KontakPenting::where('jenisinstansi','=', 'Kantor Polisi')->get();
+        $pemadam = KontakPenting::where('jenisinstansi','=', 'Kantor Pemadam')->get();
+        return view('kontak.telepon', [
+            'rumahsakit' => $rumahsakit,
+            'polisi' => $polisi,
+            'pemadam' => $pemadam
+        ]);
     }
 
     /**
@@ -25,21 +32,9 @@ class KontakController extends Controller
      */
     public function create()
     {
-        $rumahsakit =  KontakPenting::where('jenisinstansi','=', 'Rumah Sakit')->get();
-        $polisi = KontakPenting::where('jenisinstansi','=', 'Kantor Polisi')->get();
-        $pemadam = KontakPenting::where('jenisinstansi','=', 'Kantor Pemadam')->get();
-        return view('telepon', [
-            'rumahsakit' => $rumahsakit,
-            'polisi' => $polisi,
-            'pemadam' => $pemadam
-        ]);
+        return view('kontak.tambahkontak');
     }
-
-    public function add()
-    {
-        return view('tambahkontak');
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -94,7 +89,10 @@ class KontakController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kontak = KontakPenting::find($id);
+        return view('kontak.gantikontak', [
+            'kontak' => $kontak
+        ]);
     }
 
     /**
@@ -106,7 +104,16 @@ class KontakController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kontak = KontakPenting::find($id);
+        $kontak->admin_id = auth()->id();
+        $kontak->namainstansi = ucwords(strtolower($request->namainstansi));
+        $kontak->nomortelepon = $request->nomortelepon;
+        $kontak->alamat = ucwords(strtolower($request->alamat));
+        $kontak->jenisinstansi = ucwords(strtolower($request->jenisinstansi));
+        $kontak->save();
+        
+        session()->flash('success', 'Kontak berhasil diubah!');
+        return redirect()->route('kontak');
     }
 
     /**
@@ -117,6 +124,11 @@ class KontakController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (auth()->getUser()->isAdmin()) {
+            $kontak = KontakPenting::where('id', $id)
+                    ->delete();
+        }
+        session()->flash('success', 'Kontak berhasil dihapus!');
+        return redirect()->route('kontak');
     }
 }

@@ -30,9 +30,9 @@
         </div>
 
         <div class="items">
-            <!-- <li><i class="fa-solid fa-circle-user"></i><a href="/profile">Profile</a></li> -->
-            <li><i class="fa-solid fa-clipboard-list"></i><a href="/profile">Laporan</a></li>
-            <li><i class="fa-solid fa-right-from-bracket"></i><a href="/logout">Keluar</a></li>
+        <li><a class="fa-solid fa-circle-user"></a><a href="/akun">Profile</a></li>
+            <li class="active"><a class="fa-solid fa-clipboard-list"></a><a href="/profilelaporan">Laporan</a></li>
+            <li><a class="fa-solid fa-right-from-bracket"></a><a href="/logout">Keluar</a></li>
         </div>
     </section>
 
@@ -60,19 +60,19 @@
 
         <div class="uptask">
             <div class="uptaskspace">
-                <h4><a href="/profile"><small><b>Semua Laporan</b></small></a></h4>
+                <h4><a href="/profilelaporan"><small><b>Semua Laporan</b></small></a></h4>
             </div>
 
             <div class="uptaskspace">
-                <h4><a href="/profile/laporan-diproses"><small><b>Progres</b></small></a></h4>
+                <h4><a href="/profilelaporan/laporan-diproses"><small><b>Progres</b></small></a></h4>
             </div>
 
             <div class="uptaskspace">
-                <h4><a class="active" href="/profile/laporan-ditolak"><small><b>Ditolak</b></small></a></h4>
+                <h4><a class="active" href="/profilelaporan/laporan-ditolak"><small><b>Ditolak</b></small></a></h4>
             </div>
 
             <div class="uptaskspace">
-                <h4><a href="/profile/laporan-selesai"><small><b>Selesai</b></small></a></h4>
+                <h4><a href="/profilelaporan/laporan-selesai"><small><b>Selesai</b></small></a></h4>
             </div>
         </div>
 

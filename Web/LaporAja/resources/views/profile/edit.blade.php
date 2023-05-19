@@ -28,9 +28,9 @@
         </div>
 
         <div class="items">
-            <!-- <li><i class="fa-solid fa-circle-user"></i><a href="#">Profile</a></li> -->
-            <li><i class="fa-solid fa-clipboard-list"></i><a href="/profile">Laporan</a></li>
-            <li><i class="fa-solid fa-right-from-bracket"></i><a href="/logout">Keluar</a></li>
+            <li><a class="fa-solid fa-circle-user"></a><a href="/akun">Profile</a></li>
+            <li class="active"><a class="fa-solid fa-clipboard-list"></a><a href="/profilelaporan">Laporan</a></li>
+            <li><a class="fa-solid fa-right-from-bracket"></a><a href="/logout">Keluar</a></li>
         </div>
     </section>
 
@@ -103,8 +103,6 @@
                   </label>
                 </div>
           </div>
-        
-
           <!-- <div class="text">
                   <input type="text" class="form-control" id="inputAddress" placeholder="Jenis Instansi">
           </div> -->
