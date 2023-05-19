@@ -108,7 +108,7 @@ class AkunController extends Controller
             $laporan = Laporan::where('user_id', $user->id)->delete();
             $user->forceDelete();
             session()->flash('success', 'Akun berhasil dihapus!');
-            return redirect()->to('/login');
+            return redirect()->to('/');
         }
     }
 }
