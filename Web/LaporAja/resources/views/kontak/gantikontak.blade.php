@@ -82,6 +82,7 @@
             <div class="col-12">
               <input type="text" class="form-control" id="inputAddress2" name="alamat" value="{{$kontak->alamat}}" required>
             </div>
+            
 
             <section id="but">
               <a href="/kontakdarurat"><button type="button" class="btn btn-danger">Batal</button></a>
