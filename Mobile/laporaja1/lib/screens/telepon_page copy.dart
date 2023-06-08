@@ -5,11 +5,13 @@ class TeleponPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Telepon', 
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.red,
-        ),),
+        title: Text(
+          'Telepon',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.red,
+          ),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.only(top: 10),
@@ -23,9 +25,10 @@ class TeleponPage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => RumahSakitPage()),
                 );
               },
-              child: Text('Rumah Sakit',
-              style: TextStyle(
-                color: Colors.black,
+              child: Text(
+                'Rumah Sakit',
+                style: TextStyle(
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -37,9 +40,10 @@ class TeleponPage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => PolisiPage()),
                 );
               },
-              child: Text('Polisi',
-              style: TextStyle(
-                color: Colors.black,
+              child: Text(
+                'Polisi',
+                style: TextStyle(
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -51,9 +55,10 @@ class TeleponPage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => PemadamPage()),
                 );
               },
-              child: Text('Pemadam',
-              style: TextStyle(
-                color: Colors.black,
+              child: Text(
+                'Pemadam',
+                style: TextStyle(
+                  color: Colors.black,
                 ),
               ),
             ),

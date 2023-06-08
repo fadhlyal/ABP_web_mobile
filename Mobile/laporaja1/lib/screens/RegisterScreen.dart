@@ -1,6 +1,25 @@
 import 'package:flutter/material.dart';
+import '../screens/HomeScreen.dart';
+import '../screens/LoginScreen.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
+  @override
+  _RegisterScreenState createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _namaDepanController = TextEditingController();
+  final TextEditingController _namaBelakangController = TextEditingController();
+  final TextEditingController _provinsiController = TextEditingController();
+  final TextEditingController _kabKotaController = TextEditingController();
+  final TextEditingController _kecamatanController = TextEditingController();
+  final TextEditingController _noHpController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _konfirmPasswordController =
+      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +48,7 @@ class RegisterPage extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Already have an account? ',
+                      'Sudah Punya Akun? ',
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.normal,
@@ -37,7 +56,11 @@ class RegisterPage extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        // Navigate to login page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()),
+                        );
                       },
                       child: Text(
                         'Login',
@@ -50,169 +73,201 @@ class RegisterPage extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          labelText: 'Nama Depan',
-                          filled: true,
-                          fillColor: Colors.white,
-                        ),
-                        style: TextStyle(
-                            color: Colors.black), // Set text color to black
-                        cursorColor: Colors.black,
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              controller: _namaDepanController,
+                              keyboardType: TextInputType.name,
+                              decoration: InputDecoration(
+                                labelText: 'Nama Depan',
+                                filled: true,
+                                fillColor: Colors.white,
+                              ),
+                              style: TextStyle(
+                                  color:
+                                      Colors.black), // Set text color to black
+                              cursorColor: Colors.black,
+                            ),
+                          ),
+                          SizedBox(width: 16),
+                          Expanded(
+                            child: TextFormField(
+                              controller: _namaBelakangController,
+                              keyboardType: TextInputType.name,
+                              decoration: InputDecoration(
+                                labelText: 'Nama Belakang',
+                                filled: true,
+                                fillColor: Colors.white,
+                              ),
+                              style: TextStyle(
+                                  color:
+                                      Colors.black), // Set text color to black
+                              cursorColor: Colors.black,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(width: 16),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          labelText: 'Nama Belakang',
-                          filled: true,
-                          fillColor: Colors.white,
-                        ),
-                        style: TextStyle(
-                            color: Colors.black), // Set text color to black
-                        cursorColor: Colors.black,
+                      SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              controller: _provinsiController,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                labelText: 'Provinsi',
+                                filled: true,
+                                fillColor: Colors.white,
+                              ),
+                              style: TextStyle(
+                                  color:
+                                      Colors.black), // Set text color to black
+                              cursorColor: Colors.black,
+                            ),
+                          ),
+                          SizedBox(width: 16),
+                          Expanded(
+                            child: TextFormField(
+                              controller: _kabKotaController,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                labelText: 'Kab/Kota',
+                                filled: true,
+                                fillColor: Colors.white,
+                              ),
+                              style: TextStyle(
+                                  color:
+                                      Colors.black), // Set text color to black
+                              cursorColor: Colors.black,
+                            ),
+                          ),
+                          SizedBox(width: 16),
+                          Expanded(
+                            child: TextFormField(
+                              controller: _kecamatanController,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                labelText: 'Kecamatan',
+                              ),
+                              style: TextStyle(
+                                  color:
+                                      Colors.black), // Set text color to black
+                              cursorColor: Colors.black,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          labelText: 'Provinsi',
-                          filled: true,
-                          fillColor: Colors.white,
-                        ),
-                        style: TextStyle(
-                            color: Colors.black), // Set text color to black
-                        cursorColor: Colors.black,
+                      SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              controller: _noHpController,
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                labelText: 'Hp',
+                                filled: true,
+                                fillColor: Colors.white,
+                              ),
+                              style: TextStyle(
+                                  color:
+                                      Colors.black), // Set text color to black
+                              cursorColor: Colors.black,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(width: 16),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          labelText: 'Kab/Kota',
-                          filled: true,
-                          fillColor: Colors.white,
-                        ),
-                        style: TextStyle(
-                            color: Colors.black), // Set text color to black
-                        cursorColor: Colors.black,
+                      SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              controller: _emailController,
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                labelText: 'Email',
+                                filled: true,
+                                fillColor: Colors.white,
+                              ),
+                              style: TextStyle(
+                                  color:
+                                      Colors.black), // Set text color to black
+                              cursorColor: Colors.black,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(width: 16),
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          labelText: 'Kecamatan',
-                          filled: true,
-                          fillColor: Colors.white,
-                        ),
-                        style: TextStyle(
-                            color: Colors.black), // Set text color to black
-                        cursorColor: Colors.black,
+                      SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              controller: _passwordController,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                labelText: 'Kata Sandi',
+                                filled: true,
+                                fillColor: Colors.white,
+                              ),
+                              style: TextStyle(
+                                  color:
+                                      Colors.black), // Set text color to black
+                              cursorColor: Colors.black,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          labelText: 'Hp',
-                          filled: true,
-                          fillColor: Colors.white,
-                        ),
-                        style: TextStyle(
-                            color: Colors.black), // Set text color to black
-                        cursorColor: Colors.black,
+                      SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              controller: _konfirmPasswordController,
+                              obscureText: true,
+                              decoration: InputDecoration(
+                                labelText: 'Konfirmasi Kata Sandi',
+                                filled: true,
+                                fillColor: Colors.white,
+                              ),
+                              cursorColor: Colors.black,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          labelText: 'Email',
-                          filled: true,
-                          fillColor: Colors.white,
-                        ),
-                        style: TextStyle(
-                            color: Colors.black), // Set text color to black
-                        cursorColor: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          labelText: 'Kata Sandi',
-                          filled: true,
-                          fillColor: Colors.white,
-                        ),
-                        style: TextStyle(
-                            color: Colors.black), // Set text color to black
-                        cursorColor: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          labelText: 'Konfirmasi Kata Sandi',
-                          filled: true,
-                          fillColor: Colors.white,
-                        ),
-                        style: TextStyle(
-                            color: Colors.black), // Set text color to black
-                        cursorColor: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 16),
-                Center(
-                  child: SizedBox(
-                    width: 150,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Perform registration
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+                      SizedBox(height: 16),
+                      Center(
+                        child: SizedBox(
+                          width: 150,
+                          height: 50,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // Perform registration
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            child: Text('Register'),
+                          ),
                         ),
                       ),
-                      child: Text('Register'),
-                    ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 16),
                 Center(
                   child: TextButton(
                     onPressed: () {
-                      // Perform registration
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
                     },
                     child: Text(
                       'Masuk Sebagai Guest',

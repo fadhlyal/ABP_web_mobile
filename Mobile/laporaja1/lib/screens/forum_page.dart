@@ -11,9 +11,7 @@ class ForumPage extends StatelessWidget {
           backgroundColor: Colors.red,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
-            onPressed: (){
-
-            },
+            onPressed: () {},
           ),
           title: Text('Forum'),
         ),
@@ -21,26 +19,29 @@ class ForumPage extends StatelessWidget {
           children: [
             ListTile(
               contentPadding: EdgeInsets.all(10.0),
-              title: Text("Anonim",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
+              title: Text(
+                "Anonim",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Perbaikan akses jalan',
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
+                  Text(
+                    'Perbaikan akses jalan',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text("Kecamatan Sukajadi",
-                  style: TextStyle(
-                    fontSize: 11.0,
-                    color: Colors.grey,
-                  ),
-                )
+                  Text(
+                    "Kecamatan Sukajadi",
+                    style: TextStyle(
+                      fontSize: 11.0,
+                      color: Colors.grey,
+                    ),
+                  )
                 ],
               ),
               trailing: Column(
@@ -50,7 +51,6 @@ class ForumPage extends StatelessWidget {
                     "1 jam yang lalu",
                     style: TextStyle(
                       fontSize: 12.0,
-                      
                     ),
                   ),
                   SizedBox(width: 4.0),
@@ -59,33 +59,36 @@ class ForumPage extends StatelessWidget {
                     color: Colors.green,
                   ),
                 ],
-            ),
+              ),
             ),
             Divider(
               color: Colors.grey,
             ),
             ListTile(
               contentPadding: EdgeInsets.all(10.0),
-              title: Text("Anonim",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
+              title: Text(
+                "Anonim",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Perbaikan akses jalan',
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
+                  Text(
+                    'Perbaikan akses jalan',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text("Kecamatan Sukajadi",
-                  style: TextStyle(
-                    fontSize: 11.0,
-                    color: Colors.grey,
-                  ),
-                )
+                  Text(
+                    "Kecamatan Sukajadi",
+                    style: TextStyle(
+                      fontSize: 11.0,
+                      color: Colors.grey,
+                    ),
+                  )
                 ],
               ),
               trailing: Column(
@@ -95,7 +98,6 @@ class ForumPage extends StatelessWidget {
                     "1 jam yang lalu",
                     style: TextStyle(
                       fontSize: 12.0,
-                      
                     ),
                   ),
                   SizedBox(width: 4.0),
@@ -104,7 +106,7 @@ class ForumPage extends StatelessWidget {
                     color: Colors.green,
                   ),
                 ],
-            ),
+              ),
             ),
           ],
         ),

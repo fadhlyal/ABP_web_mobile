@@ -52,92 +52,62 @@ class SplashScreen extends StatelessWidget {
                 SizedBox(height: 50),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ButtonMasuk(),
+                  child: SizedBox(
+                    width: 200,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()),
+                        );
+                      },
+                      child: Text('Masuk'),
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ButtonDaftar(),
+                  child: SizedBox(
+                    width: 200,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegisterScreen()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(120.0)),
+                        ),
+                      ),
+                      child: Text('Daftar'),
+                    ),
+                  ),
                 ),
-                MasukGuest(),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                    );
+                  },
+                  child: Text(
+                    'Masuk Sebagai Guest',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class ButtonMasuk extends StatelessWidget {
-  const ButtonMasuk({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 200,
-      height: 50,
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => LoginScreen()),
-          );
-        },
-        child: Text('Masuk'),
-      ),
-    );
-  }
-}
-
-class ButtonDaftar extends StatelessWidget {
-  const ButtonDaftar({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 200,
-      height: 50,
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => RegisterPage()),
-          );
-        },
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(120.0)),
-          ),
-        ),
-        child: Text('Daftar'),
-      ),
-    );
-  }
-}
-
-class MasukGuest extends StatelessWidget {
-  const MasukGuest({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
-        );
-      },
-      child: Text(
-        'Masuk Sebagai Guest',
-        style: TextStyle(
-          color: Colors.black,
-        ),
       ),
     );
   }

@@ -11,7 +11,6 @@ class TeleponPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Colors.red,
           ),
-          
         ),
       ),
       body: Padding(
@@ -73,37 +72,38 @@ class TeleponPage extends StatelessWidget {
                 children: [
                   ListTile(
                     contentPadding: EdgeInsets.all(10.0),
-                    title: Text("Anonim",
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
+                    title: Text(
+                      "Anonim",
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Kecamatan Sukajadi",
-                        style: TextStyle(
-                          fontSize: 14.0,
-                          color: Colors.grey,
+                        Text(
+                          "Kecamatan Sukajadi",
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            color: Colors.grey,
                           ),
                         )
                       ],
-                    ),                 
+                    ),
                   ),
                   Divider(
                     color: Colors.grey,
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      );
-    }
+      ),
+    );
+  }
 }
-
 
 class RumahSakitPage extends StatelessWidget {
   @override

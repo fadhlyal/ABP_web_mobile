@@ -14,28 +14,26 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30.0),
-          child: Text(
-            'Masuk',
-            style: TextStyle(
-              fontSize: 20,
-              backgroundColor: Colors.white,
-            ),
+          title: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 30.0),
+        child: Text(
+          'Masuk',
+          style: TextStyle(
+            fontSize: 20,
+            backgroundColor: Colors.white,
           ),
-        )
-        
-      ),
+        ),
+      )),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.all(25.0),        
+        padding: const EdgeInsets.all(25.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(              
+            Container(
               padding: EdgeInsets.all(16.0),
               child: Image.asset(
-                'assets/logo.png', // Ubah dengan path gambar logo Anda
+                'assets/images/logo.png',
                 height: 150.0,
               ),
             ),
@@ -53,29 +51,25 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            Row(              
+            Row(
               children: [
                 SizedBox(width: 100.0),
-                Text('Belum punya akun?',
-                style: TextStyle(
-                  fontSize: 20
-                  ),
+                Text(
+                  'Belum punya akun?',
+                  style: TextStyle(fontSize: 20),
                 ),
                 InkWell(
-              onTap: (){
-              },
-              child: Text('Daftar',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.black,
+                  onTap: () {},
+                  child: Text(
+                    'Daftar',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
-              ),
-            ),
               ],
             ),
-            
-              
-            
             SizedBox(height: 24.0),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 100.0),
@@ -86,7 +80,6 @@ class _LoginPageState extends State<LoginPage> {
                     TextFormField(
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
-                     
                       decoration: InputDecoration(
                         labelText: 'Email',
                       ),
@@ -95,39 +88,38 @@ class _LoginPageState extends State<LoginPage> {
                     TextFormField(
                       controller: _passwordController,
                       obscureText: true,
-                      
                       decoration: InputDecoration(
                         labelText: 'Kata Sandi',
                       ),
                     ),
                     SizedBox(height: 24.0),
-                    
                     ElevatedButton(
-                      onPressed: () {                       
-                      },
-                      child: Text('Masuk',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.red)
+                      onPressed: () {},
+                      child: Text(
+                        'Masuk',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.red)),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 15.0),
-                      child: TextButton(                     
-                      onPressed: () {
-                        // Logika ketika tombol "Masuk sebagai Guest" ditekan
-                      },
-                      child: Text(
-                        'Masuk sebagai Guest',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: Colors.black,
+                      child: TextButton(
+                        onPressed: () {
+                          // Logika ketika tombol "Masuk sebagai Guest" ditekan
+                        },
+                        child: Text(
+                          'Masuk sebagai Guest',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
-                    ),
-                  )
+                    )
                   ],
                 ),
               ),
