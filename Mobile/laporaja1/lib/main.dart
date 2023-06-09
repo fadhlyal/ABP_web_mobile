@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../screens/SplashScreen.dart';
 import '../screens/RegisterScreen.dart';
 import '../screens/LoginScreen.dart';
+import '../screens/HomeScreen.dart';
+import '../screens/forum_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.black)),
-      home: SplashScreen(),
+      home: ForumPage(),
     );
   }
 }

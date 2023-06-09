@@ -25,6 +25,9 @@ flutter:
   assets:
     - assets/images/background.png
     - assets/images/logo.png
+    - assets/images/ambulans.png
+    - assets/images/bomba.png
+    - assets/images/polici.png
   uses-material-design: true
 # name: ppp
 # description: A new Flutter project.
