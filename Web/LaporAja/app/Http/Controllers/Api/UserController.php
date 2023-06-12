@@ -77,9 +77,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(int $id)
     {
-        return new UserResource($user);
+        return User::findOrFail($id);
     }
 
     /**

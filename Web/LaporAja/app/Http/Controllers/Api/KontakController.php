@@ -70,9 +70,9 @@ class KontakController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(KontakPenting $kontakpenting)
+    public function show(int $id)
     {
-        return new KontakResource($kontakpenting);
+        return KontakPenting::findOrFail($id);
     }
 
     /**
