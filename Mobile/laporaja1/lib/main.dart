@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../screens/SplashScreen.dart';
-import '../screens/RegisterScreen.dart';
-import '../screens/LoginScreen.dart';
-import '../screens/HomeScreen.dart';
-import '../screens/forum_page.dart';
+import '../screens/BotNavBar.dart';
+import '../screens/BotNavBarGuest.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,11 +14,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Percobaan Kedua",
+      title: "LaporAja",
       theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.black)),
-      home: ForumPage(),
+      home: NavBarGuest(),
     );
   }
 }

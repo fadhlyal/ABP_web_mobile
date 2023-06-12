@@ -6,22 +6,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomeScreen> {
-  int _currentIndex = 0; // Keep track of the currently selected index
-
-  // final List<Widget> _pages = [
-  //   HomeScreen(),
-  //   // SearchPage(),
-  //   // CartPage(),
-  //   // FavoritePage(),
-  //   LoginScreen(),
-  // ];
-
-  void _onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index; // Update the selected index
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,6 +95,7 @@ class _MyHomePageState extends State<HomeScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(height: 8),
             Container(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -185,6 +170,7 @@ class _MyHomePageState extends State<HomeScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(height: 8),
             Row(
               children: [
                 Expanded(
@@ -227,37 +213,6 @@ class _MyHomePageState extends State<HomeScreen> {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex, // Set the current active index
-        onTap: _onTabTapped, // Register the callback function
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.question_answer),
-            label: 'Forum',
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.edit),
-            label: 'Lapor',
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.phone),
-            label: 'Kontak',
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-            backgroundColor: Colors.black,
-          ),
-        ],
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/HomeScreen.dart';
+import '../screens/BotNavBarGuest.dart';
 import '../screens/RegisterScreen.dart';
 import '../screens/LoginScreen.dart';
 
@@ -94,7 +94,7 @@ class SplashScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      MaterialPageRoute(builder: (context) => NavBarGuest()),
                     );
                   },
                   child: Text(
