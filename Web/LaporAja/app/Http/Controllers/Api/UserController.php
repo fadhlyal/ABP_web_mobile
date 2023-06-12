@@ -21,9 +21,9 @@ class UserController extends Controller
         $data = new UserCollection(User::all());
 
         if ($data) {
-            return ApiFormatter::createApi(200, 'Success', $data);
+            return ApiFormatter::createApi(200, $data, $data->count());
         } else {
-            return ApiFormatter::createApi(400, 'Failed');
+            return ApiFormatter::createApi(400);
         }
     }
 
@@ -62,12 +62,12 @@ class UserController extends Controller
             $data = User::where('id','=',$user->id)->get();
 
             if ($data) {
-                return ApiFormatter::createApi(200, 'Success', $data);
+                return ApiFormatter::createApi(200, $data);
             } else {
-                return ApiFormatter::createApi(400, 'Failed');
+                return ApiFormatter::createApi(400);
             }
         } catch (Exception $error) {
-            return ApiFormatter::createApi(400, 'Failed');
+            return ApiFormatter::createApi(400);
         }
     }
 
@@ -79,13 +79,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $data =  new UserResource($user);
-
-        if ($data) {
-            return ApiFormatter::createApi(200, 'Success', $data);
-        } else {
-            return ApiFormatter::createApi(400, 'Failed');
-        }
+        return new UserResource($user);
     }
 
     /**
@@ -125,12 +119,12 @@ class UserController extends Controller
             $data = User::where('id','=',$user->id)->get();
 
             if ($data) {
-                return ApiFormatter::createApi(200, 'Success', $data);
+                return ApiFormatter::createApi(200, $data);
             } else {
-                return ApiFormatter::createApi(400, 'Failed');
+                return ApiFormatter::createApi(400);
             }
         } catch (ValidationException $error) {
-            return ApiFormatter::createApi(400, 'Failed');
+            return ApiFormatter::createApi(400);
         }
     }
 
@@ -147,9 +141,9 @@ class UserController extends Controller
         $data = $user->forceDelete();
         
         if ($data) {
-            return ApiFormatter::createApi(200, 'Success Destroy', $data);
+            return ApiFormatter::createApi(200, $data);
         } else {
-            return ApiFormatter::createApi(400, 'Failed');
+            return ApiFormatter::createApi(400);
         }
     }
 }

@@ -21,9 +21,9 @@ class KontakController extends Controller
         $data = new KontakCollection(KontakPenting::all());
 
         if ($data) {
-            return ApiFormatter::createApi(200, 'Success', $data);
+            return ApiFormatter::createApi(200, $data, $data->count());
         } else {
-            return ApiFormatter::createApi(400, 'Failed');
+            return ApiFormatter::createApi(400);
         }
     }
 
@@ -55,12 +55,12 @@ class KontakController extends Controller
             $data = KontakPenting::where('id','=',$kontak->id)->get();
 
             if ($data) {
-                return ApiFormatter::createApi(200, 'Success', $data);
+                return ApiFormatter::createApi(200, $data);
             } else {
-                return ApiFormatter::createApi(400, 'Failed');
+                return ApiFormatter::createApi(400);
             }
         } catch (Exception $error) {
-            return ApiFormatter::createApi(400, 'Failed');
+            return ApiFormatter::createApi(400);
         }
     }
 
@@ -72,13 +72,7 @@ class KontakController extends Controller
      */
     public function show(KontakPenting $kontakpenting)
     {
-        $data =  new KontakResource($kontakpenting);
-
-        if ($data) {
-            return ApiFormatter::createApi(200, 'Success', $data);
-        } else {
-            return ApiFormatter::createApi(400, 'Failed');
-        }
+        return new KontakResource($kontakpenting);
     }
 
     /**
@@ -112,12 +106,12 @@ class KontakController extends Controller
             $data = KontakPenting::where('id','=',$kontak->id)->get();
 
             if ($data) {
-                return ApiFormatter::createApi(200, 'Success', $data);
+                return ApiFormatter::createApi(200, $data);
             } else {
-                return ApiFormatter::createApi(400, 'Failed');
+                return ApiFormatter::createApi(400);
             }
         } catch (Exception $error) {
-            return ApiFormatter::createApi(400, 'Failed');
+            return ApiFormatter::createApi(400);
         }
     }
 
@@ -134,9 +128,9 @@ class KontakController extends Controller
         $data = $kontakpenting->delete();
         
         if ($data) {
-            return ApiFormatter::createApi(200, 'Success Destroy', $data);
+            return ApiFormatter::createApi(200, $data);
         } else {
-            return ApiFormatter::createApi(400, 'Failed');
+            return ApiFormatter::createApi(400);
         }
     }
 }
