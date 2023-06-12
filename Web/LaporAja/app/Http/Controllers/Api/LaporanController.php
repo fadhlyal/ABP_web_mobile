@@ -21,9 +21,9 @@ class LaporanController extends Controller
         $data = new LaporanCollection(Laporan::all());
 
         if ($data) {
-            return ApiFormatter::createApi(200, 'Success', $data);
+            return ApiFormatter::createApi(200, $data, $data->count());
         } else {
-            return ApiFormatter::createApi(400, 'Failed');
+            return ApiFormatter::createApi(400);
         }
     }
 
@@ -59,12 +59,12 @@ class LaporanController extends Controller
             $data = Laporan::where('id','=',$laporan->id)->get();
 
             if ($data) {
-                return ApiFormatter::createApi(200, 'Success', $data);
+                return ApiFormatter::createApi(200, $data);
             } else {
-                return ApiFormatter::createApi(400, 'Failed');
+                return ApiFormatter::createApi(400);
             }
         } catch (Exception $error) {
-            return ApiFormatter::createApi(400, 'Failed');
+            return ApiFormatter::createApi(400);
         }
     }
 
@@ -76,13 +76,7 @@ class LaporanController extends Controller
      */
     public function show(Laporan $laporan)
     {
-        $data =  new LaporanResource($laporan);
-
-        if ($data) {
-            return ApiFormatter::createApi(200, 'Success', $data);
-        } else {
-            return ApiFormatter::createApi(400, 'Failed');
-        }
+        return new LaporanResource($laporan);
     }
 
     /**
@@ -122,12 +116,12 @@ class LaporanController extends Controller
             $data = Laporan::where('id','=',$laporan->id)->get();
 
             if ($data) {
-                return ApiFormatter::createApi(200, 'Success', $data);
+                return ApiFormatter::createApi(200, $data);
             } else {
-                return ApiFormatter::createApi(400, 'Failed');
+                return ApiFormatter::createApi(400);
             }
         } catch (Exception $error) {
-            return ApiFormatter::createApi(400, 'Failed');
+            return ApiFormatter::createApi(400);
         }
     }
 
@@ -144,9 +138,9 @@ class LaporanController extends Controller
         $data = $laporan->delete();
         
         if ($data) {
-            return ApiFormatter::createApi(200, 'Success Destroy', $data);
+            return ApiFormatter::createApi(200, $data);
         } else {
-            return ApiFormatter::createApi(400, 'Failed');
+            return ApiFormatter::createApi(400);
         }
     }
 }
