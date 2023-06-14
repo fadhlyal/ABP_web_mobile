@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../screens/EditScreen.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -74,18 +76,68 @@ class _MyHomePageState extends State<HomeScreen> {
                           ),
                         ),
                         SizedBox(height: 8),
-                        Text(
-                          'Jumlah Laporan',
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Flexible(
+                              child: FractionallySizedBox(
+                                widthFactor: 0.8,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => EditEmail()),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                    ),
+                                  ),
+                                  child: Text('Edit Email'),
+                                ),
+                              ),
+                            ),
+                            Flexible(
+                              child: FractionallySizedBox(
+                                widthFactor: 0.9,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    // Perform delete account action
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                    ),
+                                  ),
+                                  child: Text('Hapus Akun'),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
                 ),
               ],
+            ),
+            SizedBox(height: 16),
+            SizedBox(
+              width: 100,
+              height: 30,
+              child: ElevatedButton(
+                onPressed: () {
+                  // Perform registration
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
+                child: Text('Logout'),
+              ),
             ),
             SizedBox(height: 16),
             Text(
