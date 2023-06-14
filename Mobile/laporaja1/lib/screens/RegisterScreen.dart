@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../screens/BotNavBarGuest.dart';
 import '../screens/LoginScreen.dart';
+import 'package:laporaja/models/user.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -248,6 +251,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: ElevatedButton(
                             onPressed: () {
                               // Perform registration
+                              _register();
                             },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -284,5 +288,65 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
+  }
+  void _register() async {
+    // Validate form fields
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    // Extract email and password from controllers
+    String firstname = _namaDepanController.text;
+    String lastname = _namaBelakangController.text;
+    String phonenumber = _noHpController.text;
+    String provinsi = _provinsiController.text;
+    String kabkota = _kabKotaController.text;
+    String kecamatan = _kecamatanController.text;
+    String email = _emailController.text;
+    String password = _passwordController.text;
+    String confirmPassword = _konfirmPasswordController.text;
+
+    if (password != confirmPassword) {
+      return;
+    }
+
+    // Create a map with the request body data
+    Map<String, String> requestBody = {
+      'firstname' : firstname,
+      'lastname' : lastname,
+      'phonenumber' : phonenumber,
+      'provinsi' : provinsi,
+      'kabkota' : kabkota,
+      'kecamatan' : kecamatan,
+      'email' : email,
+      'password' : password
+    };
+
+    // Send the POST request
+    try {
+      http.Response res = await http.post(
+        Uri.parse('http://10.60.226.135:8000/api/users'),
+        body: requestBody,
+      );
+
+      // Check the response status code
+      if (res.statusCode == 200) {
+        // Obtain shared preferences.
+        print('Upload success');
+        setState(() {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => NavBarGuest()),
+          );
+        });
+      } else {
+        // Failed login
+        print('Upload failed');
+      }
+    } catch (e) {
+      // Error occurred
+      print('An error occurred: $e');
+    }
   }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:laporaja/screens/SplashScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:laporaja/models/user.dart';
-
+import 'package:http/http.dart' as http;
 import '../screens/EditScreen.dart';
+import 'BotNavBarGuest.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -113,7 +115,7 @@ class _MyHomePageState extends State<HomeScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => EditEmail()),
+                                          builder: (context) => EditEmail(user: user!)),
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -131,6 +133,7 @@ class _MyHomePageState extends State<HomeScreen> {
                                 child: ElevatedButton(
                                   onPressed: () {
                                     // Perform delete account action
+                                    _deleteAccount();
                                   },
                                   style: ElevatedButton.styleFrom(
                                     shape: RoundedRectangleBorder(
@@ -156,6 +159,7 @@ class _MyHomePageState extends State<HomeScreen> {
               child: ElevatedButton(
                 onPressed: () {
                   // Perform registration
+                  _logout();
                 },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
@@ -293,5 +297,53 @@ class _MyHomePageState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  _deletePreference() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
+
+  _logout() async {
+    _deletePreference();
+    setState(() {
+      Navigator
+          .of(context)
+          .pushReplacement(
+          MaterialPageRoute(
+              builder: (BuildContext context) => SplashScreen()
+          )
+      );
+    });
+  }
+
+  _deleteAccount() async {
+    // Send the POST request
+    try {
+      String url = "http://10.60.226.135:8000/api/users/${user?.id.toString()}";
+      http.Response res = await http.delete(
+        Uri.parse(url)
+      );
+
+      // Check the response status code
+      if (res.statusCode == 200) {
+        // Obtain shared preferences.
+        _deletePreference();
+        print('Delete Success');
+        setState(() {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => NavBarGuest()),
+          );
+        });
+      } else {
+        // Failed login
+        print('Upload failed');
+      }
+    } catch (e) {
+      // Error occurred
+      print('An error occurred: $e');
+    }
   }
 }

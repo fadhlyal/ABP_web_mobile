@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
 use App\Helpers\ApiFormatter;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -91,41 +92,54 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
-            $request->validate([
-                'firstname' => 'required',
-                'lastname' => 'required',
-                'phonenumber' => 'numeric|required',
-                'provinsi' => 'required',
-                'kabkota' => 'required',
-                'kecamatan' => 'required',
-                'email' => 'required|email:rfc,dns',
-                'password' => 'min:8|required'
-            ]);
-
-            $user = User::findOrFail($id);
-
-            $user->update([
-                'firstname' => ucwords(strtolower($request->firstname)),
-                'lastname' => ucwords(strtolower($request->lastname)),
-                'phonenumber' => $request->phonenumber,
-                'provinsi' => ucwords(strtolower($request->provinsi)),
-                'kabkota' => ucwords(strtolower($request->kabkota)),
-                'kecamatan' => ucwords(strtolower($request->kecamatan)),
-                'email' => $request->email,
-                'password' => $request->password
-            ]);
-
-            $data = User::where('id','=',$user->id)->get();
-
-            if ($data) {
-                return ApiFormatter::createApi(200, $data);
-            } else {
-                return ApiFormatter::createApi(400);
-            }
-        } catch (ValidationException $error) {
+        $request->validate([
+            'email' => 'required|unique:users,email|email:rfc,dns',
+            'password' => 'min:8|required'
+        ]);
+        
+        $user = User::findOrFail($id);
+        if (Hash::check($request->password, $user->password)) {
+            $user->email = $request->email;
+            $user->save();
+            return ApiFormatter::createApi(200, $user);
+        } else {
             return ApiFormatter::createApi(400);
         }
+        // try {
+        //     $request->validate([
+        //         'firstname' => 'required',
+        //         'lastname' => 'required',
+        //         'phonenumber' => 'numeric|required',
+        //         'provinsi' => 'required',
+        //         'kabkota' => 'required',
+        //         'kecamatan' => 'required',
+        //         'email' => 'required|email:rfc,dns',
+        //         'password' => 'min:8|required'
+        //     ]);
+
+        //     $user = User::findOrFail($id);
+
+        //     $user->update([
+        //         'firstname' => ucwords(strtolower($request->firstname)),
+        //         'lastname' => ucwords(strtolower($request->lastname)),
+        //         'phonenumber' => $request->phonenumber,
+        //         'provinsi' => ucwords(strtolower($request->provinsi)),
+        //         'kabkota' => ucwords(strtolower($request->kabkota)),
+        //         'kecamatan' => ucwords(strtolower($request->kecamatan)),
+        //         'email' => $request->email,
+        //         'password' => $request->password
+        //     ]);
+
+        //     $data = User::where('id','=',$user->id)->get();
+
+        //     if ($data) {
+        //         return ApiFormatter::createApi(200, $data);
+        //     } else {
+        //         return ApiFormatter::createApi(400);
+        //     }
+        // } catch (ValidationException $error) {
+        //     return ApiFormatter::createApi(400);
+        // }
     }
 
     /**
@@ -155,5 +169,10 @@ class UserController extends Controller
         } else {
             return ApiFormatter::createApi(400);
         }
+    }
+
+    public function change_email(Request $request)
+    {
+        
     }
 }

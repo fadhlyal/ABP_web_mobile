@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'package:laporaja/models/laporan.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'BotNavBar.dart';
 
 class LaporScreen extends StatefulWidget {
   @override
@@ -17,13 +20,25 @@ class _LaporScreenState extends State<LaporScreen> {
   TextEditingController _provinsiController = TextEditingController();
   TextEditingController _kabkotaController = TextEditingController();
   TextEditingController _kecamatanController = TextEditingController();
-  TextEditingController _namaPelaporController = TextEditingController();
   TextEditingController _deskripsiController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _getUserId();
+  }
 
   _getUserId() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  int? id = prefs.getInt('id');
+  String? _provinsi = prefs.getString('provinsi');
+  String? _kabkota = prefs.getString('kabkota');
+  String? _kecamatan = prefs.getString('kecamatan');
   setState(() {
-    userId = prefs.getInt('id');
+    userId = id;
+    _provinsiController.text = _provinsi!;
+    _kabkotaController.text = _kabkota!;
+    _kecamatanController.text = _kecamatan!;
   });
 }
 
@@ -141,24 +156,6 @@ class _LaporScreenState extends State<LaporScreen> {
                     ],
                   ),
                   SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          controller: _namaPelaporController,
-                          decoration: InputDecoration(
-                            labelText: 'Nama Pelapor',
-                            filled: true,
-                            fillColor: Colors.white,
-                          ),
-                          style: TextStyle(
-                              color: Colors.black), // Set text color to black
-                          cursorColor: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16),
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 10.0),
                     child: TextFormField(
@@ -203,6 +200,8 @@ class _LaporScreenState extends State<LaporScreen> {
       return;
     }
 
+    print(userId);
+
     // Extract email and password from controllers
     String judul = _judulController.text;
     int id = userId!;
@@ -234,6 +233,13 @@ class _LaporScreenState extends State<LaporScreen> {
       if (res.statusCode == 200) {
         // Obtain shared preferences.
         print('Upload success');
+        setState(() {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => NavBar()),
+          );
+        });
       } else {
         // Failed login
         print('Upload failed');
