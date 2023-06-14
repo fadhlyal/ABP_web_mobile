@@ -146,4 +146,14 @@ class UserController extends Controller
             return ApiFormatter::createApi(400);
         }
     }
+
+    public function login(Request $request)
+    {
+        if (auth()->attempt(request(['email', 'password']))) {
+            $data = auth()->getUser();
+            return ApiFormatter::createApi(200, $data);
+        } else {
+            return ApiFormatter::createApi(400);
+        }
+    }
 }
