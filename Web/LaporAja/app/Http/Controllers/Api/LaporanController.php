@@ -37,6 +37,7 @@ class LaporanController extends Controller
     {
         try {
             $request->validate([
+                'user_id' => 'required',
                 'judul' => 'required',
                 'alamat' => 'required',
                 'provinsi' => 'required',
@@ -46,8 +47,8 @@ class LaporanController extends Controller
             ]);
 
             $laporan = Laporan::create([
+                'user_id' => $request->user_id,
                 'judul' => ucwords(strtolower($request->judul)),
-                'user_id' => auth()->id(),
                 'alamat' => $request->alamat,
                 'provinsi' => ucwords(strtolower($request->provinsi)),
                 'kabkota' => ucwords(strtolower($request->kabkota)),

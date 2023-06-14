@@ -33,6 +33,7 @@ class Laporan {
   Laporan({
     required this.id,
     required this.userId,
+    this.adminId,
     required this.judul,
     required this.alamat,
     required this.provinsi,
@@ -40,12 +41,13 @@ class Laporan {
     required this.kecamatan,
     required this.deskripsi,
     required this.status,
-    required this.createdAt,
-    required this.updatedAt,
+    // required this.createdAt,
+    // required this.updatedAt,
   });
 
   int id;
   int userId;
+  int ?adminId;
   String judul;
   String alamat;
   String provinsi;
@@ -53,12 +55,13 @@ class Laporan {
   String kecamatan;
   String deskripsi;
   String status;
-  String createdAt;
-  String updatedAt;
+  // String createdAt;
+  // String updatedAt;
 
   factory Laporan.fromJson(Map<String, dynamic> json) => Laporan(
     id: json["id"],
     userId: json["user_id"],
+    adminId: json["admin_id"],
     judul: json["judul"],
     alamat: json["alamat"],
     provinsi: json["provinsi"],
@@ -66,13 +69,14 @@ class Laporan {
     kecamatan: json["kecamatan"],
     deskripsi: json["deskripsi"],
     status: json["status"],
-    createdAt: json["createdAt"],
-    updatedAt: json["updatedAt"]
+    // createdAt: json["createdAt"],
+    // updatedAt: json["updatedAt"]
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "user_id": userId,
+    "admin_id": adminId,
     "judul": judul,
     "alamat": alamat,
     "provinsi": provinsi,
@@ -80,7 +84,7 @@ class Laporan {
     "kecamatan": kecamatan,
     "deskripsi": deskripsi,
     "status": status,
-    "createdAt": createdAt,
-    "updatedAt": updatedAt
+    // "createdAt": createdAt,
+    // "updatedAt": updatedAt
   };
 }
