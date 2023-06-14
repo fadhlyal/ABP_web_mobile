@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user.dart';
+import '../services/string.dart';
 
 class EditEmail extends StatelessWidget {
   final User user;
@@ -133,8 +134,8 @@ class EditEmail extends StatelessWidget {
     };
 
     try {
-      String url = "http://10.60.226.135:8000/api/users/${user?.id.toString()}?_method=PUT";
-      http.Response res = await http.post(
+      String url = "${Strings.APIURL}/users/${user?.id.toString()}";
+      http.Response res = await http.put(
           Uri.parse(url),
           body: requestBody,
       );

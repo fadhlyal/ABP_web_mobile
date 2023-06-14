@@ -6,6 +6,8 @@ import 'package:laporaja/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../services/string.dart';
+
 class RegisterScreen extends StatefulWidget {
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
@@ -325,7 +327,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     // Send the POST request
     try {
       http.Response res = await http.post(
-        Uri.parse('http://10.60.226.135:8000/api/users'),
+        Uri.parse('${Strings.APIURL}/users'),
         body: requestBody,
       );
 

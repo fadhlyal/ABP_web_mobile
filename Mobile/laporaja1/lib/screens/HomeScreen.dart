@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:laporaja/models/user.dart';
 import 'package:http/http.dart' as http;
 import '../screens/EditScreen.dart';
+import '../services/string.dart';
 import 'BotNavBarGuest.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -320,7 +321,7 @@ class _MyHomePageState extends State<HomeScreen> {
   _deleteAccount() async {
     // Send the POST request
     try {
-      String url = "http://10.60.226.135:8000/api/users/${user?.id.toString()}";
+      String url = "${Strings.APIURL}/users/${user?.id.toString()}";
       http.Response res = await http.delete(
         Uri.parse(url)
       );

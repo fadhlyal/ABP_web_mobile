@@ -5,6 +5,7 @@ import 'package:laporaja/models/laporan.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../services/string.dart';
 import 'BotNavBar.dart';
 
 class LaporScreen extends StatefulWidget {
@@ -225,7 +226,7 @@ class _LaporScreenState extends State<LaporScreen> {
     // Send the POST request
     try {
       http.Response res = await http.post(
-        Uri.parse('http://10.60.226.135:8000/api/laporan'),
+        Uri.parse('${Strings.APIURL}/laporan'),
         body: requestBody,
       );
 

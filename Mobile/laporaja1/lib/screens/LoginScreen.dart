@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:laporaja/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../services/string.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -162,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
     // Send the POST request
     try {
       http.Response res = await http.post(
-        Uri.parse('http://10.60.226.135:8000/api/login'),
+        Uri.parse('${Strings.APIURL}/login'),
         body: requestBody,
       );
 

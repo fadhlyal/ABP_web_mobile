@@ -16,9 +16,19 @@ class KontakController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = new KontakCollection(KontakPenting::all());
+        $filter = $request->query('jenis');
+        
+        if ($filter == "rumahsakit") {
+            $data = new KontakCollection(KontakPenting::where('jenisinstansi','=', 'Rumah Sakit')->get());
+        } else if ($filter == "polisi") {
+            $data = new KontakCollection(KontakPenting::where('jenisinstansi','=', 'Kantor Polisi')->get());
+        } else if ($filter == "pemadam") {
+            $data = new KontakCollection(KontakPenting::where('jenisinstansi','=', 'Kantor Pemadam')->get());
+        } else {
+            $data = new KontakCollection(KontakPenting::all());
+        }
 
         if ($data) {
             return ApiFormatter::createApi(200, $data, $data->count());
