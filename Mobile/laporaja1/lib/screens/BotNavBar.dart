@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../screens/HomeScreen.dart';
 import '../screens/ForumScreen.dart';
-import '../screens/telepon_page.dart';
-import '../screens/test.dart';
+import '../screens/TeleponScreen.dart';
+import '../screens/LaporScreen.dart';
 
 class NavBar extends StatefulWidget {
   @override
@@ -16,8 +16,8 @@ class _NavBarState extends State<NavBar> {
   final List<Widget> _screens = [
     HomeScreen(),
     ForumScreen(),
-    testPage(),
-    TeleponPage(),
+    LaporScreen(),
+    TeleponScreen(),
   ];
 
   void _onTabTapped(int index) {

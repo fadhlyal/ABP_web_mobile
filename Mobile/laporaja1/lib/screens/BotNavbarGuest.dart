@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../screens/ForumScreen.dart';
-import '../screens/telepon_page.dart';
+import '../screens/TeleponScreen.dart';
+import '../screens/SplashScreen.dart';
 
 class NavBarGuest extends StatefulWidget {
   @override
@@ -13,7 +14,8 @@ class _NavBarGuestState extends State<NavBarGuest> {
 
   final List<Widget> _screens = [
     ForumScreen(),
-    TeleponPage(),
+    TeleponScreen(),
+    SplashScreen(),
   ];
 
   void _onTabTapped(int index) {
@@ -38,6 +40,11 @@ class _NavBarGuestState extends State<NavBarGuest> {
           BottomNavigationBarItem(
             icon: Icon(Icons.phone),
             label: 'Kontak',
+            backgroundColor: Colors.black,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'Login/Register',
             backgroundColor: Colors.black,
           ),
         ],
