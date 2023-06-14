@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-
+import 'dart:convert';
 import '../screens/BotNavBarGuest.dart';
+import '../screens/BotNavBar.dart';
 import '../screens/RegisterScreen.dart';
+import 'package:http/http.dart' as http;
+import 'package:laporaja/models/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -10,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  UserDataModel? dataFromAPI;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -99,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 50,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Perform login action
+                              _login();
                             },
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -136,5 +141,67 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
+  }
+
+  void _login() async {
+    // Validate form fields
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    // Extract email and password from controllers
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    // Create a map with the request body data
+    Map<String, String> requestBody = {
+      'email': email,
+      'password': password,
+    };
+
+    // Send the POST request
+    try {
+      http.Response res = await http.post(
+        Uri.parse('http://10.60.226.135:8000/api/login'),
+        body: requestBody,
+      );
+
+      // Check the response status code
+      if (res.statusCode == 200) {
+        // Obtain shared preferences.
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+        // Successful login
+        dataFromAPI = UserDataModel.fromJson(json.decode(res.body));
+
+        // _isLoading = false;
+        User currentUser = dataFromAPI!.users;
+        await prefs.setInt('id', currentUser.id);
+        await prefs.setString('firstname', currentUser.firstname);
+        await prefs.setString('lastname', currentUser.lastname);
+        await prefs.setString('phonenumber', currentUser.phonenumber);
+        await prefs.setString('provinsi', currentUser.provinsi);
+        await prefs.setString('kabkota', currentUser.kabkota);
+        await prefs.setString('kecamatan', currentUser.kecamatan);
+        await prefs.setString('email', currentUser.email);
+        await prefs.setString('role', currentUser.role);
+        setState(() {
+          Navigator.of(context).pop();
+          Navigator
+              .of(context)
+              .pushReplacement(
+              MaterialPageRoute(
+                  builder: (BuildContext context) => NavBar()
+              )
+          );
+        });
+      } else {
+        // Failed login
+        print('Login failed');
+      }
+    } catch (e) {
+      // Error occurred
+      print('An error occurred: $e');
+    }
   }
 }

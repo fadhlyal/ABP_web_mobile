@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:laporaja/models/user.dart';
 
 import '../screens/EditScreen.dart';
 
@@ -8,7 +10,31 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<HomeScreen> {
+  User? user;
+
   @override
+  void initState() {
+    super.initState();
+    _getUserData();
+  }
+
+  _getUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      user = User(
+          id: prefs.getInt('id')!,
+          firstname: prefs.getString('firstname')!,
+          lastname: prefs.getString('lastname')!,
+          phonenumber: prefs.getString('phonenumber')!,
+          provinsi: prefs.getString('provinsi')!,
+          kabkota: prefs.getString('kabkota')!,
+          kecamatan: prefs.getString('kecamatan')!,
+          email: prefs.getString('email')!,
+          role: prefs.getString('role')!
+      );
+    });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(
@@ -55,21 +81,21 @@ class _MyHomePageState extends State<HomeScreen> {
                       children: [
                         SizedBox(height: 8),
                         Text(
-                          'Nama',
+                          "${user?.firstname} ${user?.lastname}",
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.black,
                           ),
                         ),
                         Text(
-                          'Alamat',
+                          "${user?.kecamatan}, ${user?.kabkota}, ${user?.provinsi}",
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.black,
                           ),
                         ),
                         Text(
-                          'Email',
+                          "${user?.email}",
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.black,

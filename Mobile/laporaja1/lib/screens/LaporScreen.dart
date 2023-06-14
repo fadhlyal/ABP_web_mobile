@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:laporaja/models/laporan.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LaporScreen extends StatefulWidget {
   @override
@@ -6,6 +10,7 @@ class LaporScreen extends StatefulWidget {
 }
 
 class _LaporScreenState extends State<LaporScreen> {
+  int? userId;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _judulController = TextEditingController();
   TextEditingController _alamatController = TextEditingController();
@@ -14,6 +19,13 @@ class _LaporScreenState extends State<LaporScreen> {
   TextEditingController _kecamatanController = TextEditingController();
   TextEditingController _namaPelaporController = TextEditingController();
   TextEditingController _deskripsiController = TextEditingController();
+
+  _getUserId() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  setState(() {
+    userId = prefs.getInt('id');
+  });
+}
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +177,7 @@ class _LaporScreenState extends State<LaporScreen> {
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () {
-                          // Perform registration
+                          _postLaporan();
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -183,5 +195,52 @@ class _LaporScreenState extends State<LaporScreen> {
         ),
       ),
     );
+  }
+
+  void _postLaporan() async {
+    // Validate form fields
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    // Extract email and password from controllers
+    String judul = _judulController.text;
+    int id = userId!;
+    String alamat = _alamatController.text;
+    String provinsi = _provinsiController.text;
+    String kabkota = _kabkotaController.text;
+    String kecamatan = _kecamatanController.text;
+    String deskripsi = _deskripsiController.text;
+
+    // Create a map with the request body data
+    Map<String, String> requestBody = {
+      'judul': judul,
+      'user_id': id.toString(),
+      'alamat': alamat,
+      'provinsi': provinsi,
+      'kabkota': kabkota,
+      'kecamatan': kecamatan,
+      'deskripsi': deskripsi
+    };
+
+    // Send the POST request
+    try {
+      http.Response res = await http.post(
+        Uri.parse('http://10.60.226.135:8000/api/laporan'),
+        body: requestBody,
+      );
+
+      // Check the response status code
+      if (res.statusCode == 200) {
+        // Obtain shared preferences.
+        print('Upload success');
+      } else {
+        // Failed login
+        print('Upload failed');
+      }
+    } catch (e) {
+      // Error occurred
+      print('An error occurred: $e');
+    }
   }
 }

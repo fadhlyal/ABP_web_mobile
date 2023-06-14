@@ -8,24 +8,24 @@ class UserDataModel {
   UserDataModel({
     required this.code,
     required this.users,
-    required this.total,
+    // required this.total,
   });
 
   int code;
-  List<User> users;
-  int total;
+  User users;
+  // int total;
 
 
   factory UserDataModel.fromJson(Map<String, dynamic> json) => UserDataModel(
     code: json["code"],
-    users: List<User>.from(json["data"].map((x) => User.fromJson(x))),
-    total: json["total"],
+    users: User.fromJson(json["data"]),
+    // total: json["total"],
   );
 
   Map<String, dynamic> toJson() => {
     "code": code,
-    "users": List<dynamic>.from(users.map((x) => x.toJson())),
-    "total": total
+    "users": users.toJson(),
+    // "total": total
   };
 }
 
@@ -39,7 +39,6 @@ class User {
     required this.kabkota,
     required this.kecamatan,
     required this.email,
-    required this.password,
     required this.role
   });
 
@@ -51,7 +50,6 @@ class User {
   String kabkota;
   String kecamatan;
   String email;
-  String password;
   String role;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -63,7 +61,6 @@ class User {
     kabkota: json["kabkota"],
     kecamatan: json["kecamatan"],
     email: json["email"],
-    password: json["password"],
     role: json["role"]
   );
 
@@ -76,7 +73,6 @@ class User {
     "kabkota": kabkota,
     "kecamatan": kecamatan,
     "email": email,
-    "password": password,
     "role": role
   };
 }
