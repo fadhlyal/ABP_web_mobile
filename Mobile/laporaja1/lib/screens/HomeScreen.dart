@@ -6,6 +6,9 @@ import 'package:http/http.dart' as http;
 import '../screens/EditScreen.dart';
 import '../services/string.dart';
 import 'BotNavBarGuest.dart';
+import '../screens/TeleponScreenPol.dart';
+import '../screens/TeleponScreenPem.dart';
+import '../screens/TeleponScreenRs.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -198,11 +201,11 @@ class _MyHomePageState extends State<HomeScreen> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => LoginScreen()),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TeleponScreenPol()),
+                        );
                         // Tap to Kontak Penting Polisi
                       },
                       child: Image.asset(
@@ -213,11 +216,11 @@ class _MyHomePageState extends State<HomeScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => LoginScreen()),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TeleponScreenPem()),
+                        );
                         // Tap to Kontak Penting Pemadam
                       },
                       child: Image.asset(
@@ -228,11 +231,11 @@ class _MyHomePageState extends State<HomeScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => LoginScreen()),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TeleponScreenRs()),
+                        );
                         // Tap to Kontak Penting Rumah Sakit
                       },
                       child: Image.asset(
