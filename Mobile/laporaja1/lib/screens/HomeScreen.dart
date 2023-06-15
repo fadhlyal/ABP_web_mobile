@@ -33,8 +33,7 @@ class _MyHomePageState extends State<HomeScreen> {
           kabkota: prefs.getString('kabkota')!,
           kecamatan: prefs.getString('kecamatan')!,
           email: prefs.getString('email')!,
-          role: prefs.getString('role')!
-      );
+          role: prefs.getString('role')!);
     });
   }
 
@@ -116,7 +115,8 @@ class _MyHomePageState extends State<HomeScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => EditEmail(user: user!)),
+                                          builder: (context) =>
+                                              EditEmail(user: user!)),
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -245,55 +245,55 @@ class _MyHomePageState extends State<HomeScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
-            Text(
-              'Riwayat Laporan',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 8),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.all(16.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Judul Laporan',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Isi Laporan',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // SizedBox(height: 16),
+            // Text(
+            //   'Riwayat Laporan',
+            //   style: TextStyle(
+            //     fontSize: 18,
+            //     fontWeight: FontWeight.bold,
+            //   ),
+            // ),
+            // SizedBox(height: 8),
+            // Row(
+            //   children: [
+            //     Expanded(
+            //       child: Container(
+            //         padding: EdgeInsets.all(16.0),
+            //         decoration: BoxDecoration(
+            //           color: Colors.white,
+            //           boxShadow: [
+            //             BoxShadow(
+            //               color: Colors.grey.withOpacity(0.5),
+            //               spreadRadius: 2,
+            //               blurRadius: 5,
+            //               offset: Offset(0, 3),
+            //             ),
+            //           ],
+            //         ),
+            //         child: Column(
+            //           crossAxisAlignment: CrossAxisAlignment.start,
+            //           children: [
+            //             Text(
+            //               'Judul Laporan',
+            //               style: TextStyle(
+            //                 fontSize: 16,
+            //                 color: Colors.black,
+            //                 fontWeight: FontWeight.bold,
+            //               ),
+            //             ),
+            //             Text(
+            //               'Isi Laporan',
+            //               style: TextStyle(
+            //                 fontSize: 16,
+            //                 color: Colors.black,
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),
@@ -308,13 +308,8 @@ class _MyHomePageState extends State<HomeScreen> {
   _logout() async {
     _deletePreference();
     setState(() {
-      Navigator
-          .of(context)
-          .pushReplacement(
-          MaterialPageRoute(
-              builder: (BuildContext context) => SplashScreen()
-          )
-      );
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (BuildContext context) => SplashScreen()));
     });
   }
 
@@ -322,9 +317,7 @@ class _MyHomePageState extends State<HomeScreen> {
     // Send the POST request
     try {
       String url = "${Strings.APIURL}/users/${user?.id.toString()}";
-      http.Response res = await http.delete(
-        Uri.parse(url)
-      );
+      http.Response res = await http.delete(Uri.parse(url));
 
       // Check the response status code
       if (res.statusCode == 200) {
@@ -334,8 +327,7 @@ class _MyHomePageState extends State<HomeScreen> {
         setState(() {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => NavBarGuest()),
+            MaterialPageRoute(builder: (BuildContext context) => NavBarGuest()),
           );
         });
       } else {

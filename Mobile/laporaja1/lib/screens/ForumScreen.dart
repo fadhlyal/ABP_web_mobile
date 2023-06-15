@@ -52,61 +52,103 @@ class _ForumScreenState extends State<ForumScreen> {
         ),
         body: _isLoading
             ? const Center(
-          child: CircularProgressIndicator(),
-        )
-        : Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index) {
-              return ListTile(
-                contentPadding: EdgeInsets.all(10.0),
-                title: Text(
-                  "Anonim",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      dataFromAPI!.laporan[index].judul.toString(),
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
+                child: CircularProgressIndicator(),
+              )
+            : Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      contentPadding: EdgeInsets.all(10.0),
+                      // title: Text(
+                      //   "Anonim",
+                      //   style: TextStyle(
+                      //     fontWeight: FontWeight.bold,
+                      //   ),
+                      // ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            dataFromAPI!.laporan[index].judul.toString(),
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 8.0),
+                          Row(
+                            children: [
+                              Text(
+                                dataFromAPI!.laporan[index].kecamatan
+                                    .toString(),
+                                style: TextStyle(
+                                  fontSize: 11.0,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              Text(
+                                ', ',
+                                style: TextStyle(
+                                  fontSize: 11.0,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              Text(
+                                dataFromAPI!.laporan[index].provinsi.toString(),
+                                style: TextStyle(
+                                  fontSize: 11.0,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              Text(
+                                ', ',
+                                style: TextStyle(
+                                  fontSize: 11.0,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              Text(
+                                dataFromAPI!.laporan[index].kabkota.toString(),
+                                style: TextStyle(
+                                  fontSize: 11.0,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 8.0),
+                          // Text(
+                          //   dataFromAPI!.laporan[index].status.toString(),
+                          //   style: TextStyle(
+                          //     color: Colors.black,
+                          //     fontWeight: FontWeight.bold,
+                          //   ),
+                          // ),
+                        ],
                       ),
-                    ),
-                    Text(
-                      dataFromAPI!.laporan[index].kecamatan.toString(),
-                      style: TextStyle(
-                        fontSize: 11.0,
-                        color: Colors.grey,
+                      trailing: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "1 jam yang lalu",
+                            style: TextStyle(
+                              fontSize: 12.0,
+                            ),
+                          ),
+                          SizedBox(width: 4.0),
+                          Icon(
+                            Icons.check,
+                            color: Colors.green,
+                          ),
+                        ],
                       ),
-                    )
-                  ],
+                    );
+                  },
+                  itemCount: dataFromAPI!.laporan.length,
                 ),
-                trailing: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "1 jam yang lalu",
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                    ),
-                    SizedBox(width: 4.0),
-                    Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ),
-                  ],
-                ),
-              );
-            },
-            itemCount: dataFromAPI!.laporan.length,
-          ),
-        ),
+              ),
       ),
     );
   }
