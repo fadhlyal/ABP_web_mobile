@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.black)),
-      home: NavBar(),
+      home: NavBarGuest(),
     );
   }
 }

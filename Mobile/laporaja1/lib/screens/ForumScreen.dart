@@ -33,6 +33,16 @@ class _ForumScreenState extends State<ForumScreen> {
     }
   }
 
+  IconData _setImage(String status) {
+    if (status == "selesai") {
+      return Icons.check;
+    } else if (status == "ditolak") {
+      return Icons.close;
+    } else {
+      return Icons.loop;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -131,15 +141,15 @@ class _ForumScreenState extends State<ForumScreen> {
                       trailing: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
-                            "1 jam yang lalu",
-                            style: TextStyle(
-                              fontSize: 12.0,
-                            ),
-                          ),
+                          // Text(
+                          //   "1 jam yang lalu",
+                          //   style: TextStyle(
+                          //     fontSize: 12.0,
+                          //   ),
+                          // ),
                           SizedBox(width: 4.0),
                           Icon(
-                            Icons.check,
+                            _setImage(dataFromAPI!.laporan[index].status.toString()),
                             color: Colors.green,
                           ),
                         ],
