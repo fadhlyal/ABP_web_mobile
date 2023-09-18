@@ -163,12 +163,43 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        if (auth()->attempt(request(['email', 'password']))) {
-            $data = auth()->getUser();
-            return ApiFormatter::createApi(200, $data);
-        } else {
-            return ApiFormatter::createApi(400);
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+     
+        $user = User::where('email', $request->email)->first();
+     
+        if (! $user || ! Hash::check($request->password, $user->password)) {
+            return response()->json(['message' => 'Email atau password salah'], 400);
         }
+     
+        $token = $user->createToken('auth_token')->plainTextToken;
+        return response()->json([
+            'user_id' => $user->id,
+            'token' => $token,
+            'user' => $user,
+        ], 200);
+        // if (auth()->attempt(request(['email', 'password']))) {
+        //     $token = auth()->getUser()->createToken('auth_token')->plainTextToken();
+        //     $user = auth()->getUser();
+        //     return response()->json([
+        //         'user_id' => $user->id(),
+        //         'token' => $token,
+        //         'user' => $user,
+        //     ]);
+        // } else {
+        //     return response()->json(['message' => 'Email atau password salah']);
+        // }
+    }
+
+    public function logout(Request $request)
+    {   
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'message' => 'Berhasil log out',
+        ]);
     }
 
     public function change_email(Request $request)

@@ -20,9 +20,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
-    Route::apiResource('users', UserController::class);
+    Route::get('status', function() {
+        return response()->json(['message' => 'Server is active']);
+    });
+    Route::apiResource('users', UserController::class)->middleware('auth:sanctum');
     Route::post('login', [UserController::class, 'login']);
-    Route::apiResource('laporan', LaporanController::class);
+    Route::get('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
+    Route::group(['middleware' => ['auth:sanctum']], function() {
+        Route::apiResource('laporan', LaporanController::class)->except('index', 'show');
+    });
+    Route::apiResource('laporan', LaporanController::class)->only('index', 'show');
     Route::apiResource('kontakpenting', KontakController::class);
 });
 
